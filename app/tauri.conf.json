@@ -3,7 +3,7 @@
     "beforeBuildCommand": "cd frontend && yarn build",
     "beforeDevCommand": "cd frontend && yarn dev",
     "devPath": "http://localhost:5173",
-    "distDir": "../frontend/build"
+    "distDir": "../frontend/dist"
   },
   "package": {
     "productName": "hledger-dashboard",
