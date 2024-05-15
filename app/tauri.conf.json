@@ -1,7 +1,7 @@
 {
   "build": {
-    "beforeBuildCommand": "cd frontend && yarn build",
-    "beforeDevCommand": "cd frontend && yarn dev",
+    "beforeBuildCommand": "cd frontend && yarn install && yarn build",
+    "beforeDevCommand": "cd frontend && yarn install && yarn dev",
     "frontendDist": "../frontend/dist",
     "devUrl": "http://localhost:5173"
   },
