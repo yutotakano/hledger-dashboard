@@ -1858,6 +1858,11 @@ tailwindcss@^3.4.3:
     resolve "^1.22.2"
     sucrase "^3.32.0"
 
+tauri-controls@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/tauri-controls/-/tauri-controls-0.4.0.tgz#699c7bc85afa8cf070d749e00e47d7ee5590e4e7"
+  integrity sha512-M+by1V9wO6GPHL7/MXb2weAaUc0T6JzDhcuTvQF92x3kGsmfkj37F/HXHeslgQwLVLOaIBxwzTFmwsVWVH8o0g==
+
 text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz"

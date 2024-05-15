@@ -1,0 +1,13 @@
+{
+  "identifier": "window-controls",
+  "description": "permissions that are needed for window controls to work",
+  "local": true,
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "window:allow-toggle-maximize",
+    "window:allow-minimize",
+    "window:allow-close"
+  ]
+}
