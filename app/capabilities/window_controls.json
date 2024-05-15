@@ -6,7 +6,9 @@
     "main"
   ],
   "permissions": [
+    "os:allow-os-type",
     "window:allow-toggle-maximize",
+    "window:allow-set-fullscreen",
     "window:allow-minimize",
     "window:allow-close"
   ]
