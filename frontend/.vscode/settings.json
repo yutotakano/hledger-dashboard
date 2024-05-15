@@ -7,4 +7,5 @@
     "editor.defaultFormatter": "biomejs.biome",
     "editor.formatOnSave": true,
   },
+  "css.customData": [".vscode/tailwind.json"],
 }
