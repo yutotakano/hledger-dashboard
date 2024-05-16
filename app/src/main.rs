@@ -2,7 +2,12 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use tauri::Manager;
-use window_vibrancy::{apply_tabbed, apply_vibrancy, NSVisualEffectMaterial};
+
+#[cfg(target_os = "windows")]
+use window_vibrancy::apply_mica;
+
+#[cfg(target_os = "macos")]
+use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
 
 fn main() {
     tauri::Builder::default()
@@ -14,7 +19,7 @@ fn main() {
                 .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
 
             #[cfg(target_os = "windows")]
-            apply_tabbed(&window, Some(false))
+            apply_mica(&window, Some(false))
                 .expect("Unsupported platform! 'apply_mica' is only supported on Windows");
             Ok(())
         })
