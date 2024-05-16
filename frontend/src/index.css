@@ -75,6 +75,15 @@
   }
 }
 
+html {
+  height: 100%;
+}
+
 body {
   background: transparent;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }
