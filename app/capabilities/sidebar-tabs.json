@@ -1,0 +1,11 @@
+{
+  "identifier": "sidebar-tabs",
+  "description": "Permissions needed for sidebars to change window title",
+  "local": true,
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "window:allow-set-title"
+  ]
+}
