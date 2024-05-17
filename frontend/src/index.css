@@ -87,3 +87,8 @@ body {
 #root {
   height: 100%;
 }
+
+*, a, button {
+  cursor: default;
+  user-select: none;
+}
