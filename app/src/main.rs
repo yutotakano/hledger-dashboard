@@ -22,6 +22,34 @@ fn main() {
                 .expect("Unsupported platform! 'apply_mica' is only supported on Windows");
             Ok(())
         })
+        .invoke_handler(tauri::generate_handler![
+            get_hledger_version,
+            execute_hledger_command
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+}
+
+#[tauri::command]
+fn get_hledger_version() -> Result<String, String> {
+    std::process::Command::new("hledger")
+        .arg("--version")
+        .output()
+        .map_err(|err| format!("failed to run hledger --version: {}", err.to_string()))
+        .and_then(|output| {
+            String::from_utf8(output.stdout)
+                .map_err(|_| "failed to convert hledger --version output to string".to_string())
+        })
+}
+
+#[tauri::command]
+fn execute_hledger_command(command: Vec<String>) -> Result<String, String> {
+    std::process::Command::new("hledger")
+        .args(command)
+        .output()
+        .map_err(|err| format!("failed to run hledger: {}", err.to_string()))
+        .and_then(|output| {
+            String::from_utf8(output.stdout)
+                .map_err(|_| "failed to convert hledger output to string".to_string())
+        })
 }

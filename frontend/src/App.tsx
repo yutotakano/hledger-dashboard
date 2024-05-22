@@ -2,6 +2,7 @@ import { getCurrent } from "@tauri-apps/api/window";
 import { Button } from "./components/ui/button";
 import { useEffect, useState } from "react";
 import type { Event } from "@tauri-apps/api/event";
+import { invoke } from "@tauri-apps/api/core";
 import Sidebar from "./components/ui/Sidebar";
 
 const useOnFocusChanged = (callback: (focused: boolean) => void) => {
@@ -49,6 +50,17 @@ function App() {
     },
   };
 
+  const [hledgerVersion, setHledgerVersion] = useState<string | undefined>(
+    undefined,
+  );
+  useEffect(() => {
+    invoke("execute_hledger_command", { command: ["--help"] }).then(
+      (version) => {
+        setHledgerVersion(version as string);
+      },
+    );
+  }, []);
+
   return (
     <>
       <div className="grid grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] transition-[grid-template-columns] h-full p-1">
@@ -56,7 +68,7 @@ function App() {
           <Sidebar active={active} setActive={setActive} data={data} />
         </div>
         <div
-          className={`flex flex-col h-full rounded-md p-4 shadow-md transition-colors bg-white border border-gray-200 ${main_card_bg}`}
+          className={`flex overflow-hidden flex-col h-full max-h-full rounded-md p-4 shadow-md transition-colors bg-white border border-gray-200 ${main_card_bg}`}
         >
           {active === "overview" && (
             <>
@@ -69,7 +81,14 @@ function App() {
             <h1 className="text-3xl my-3 font-bold">Extra</h1>
           )}
           {active === "settings" && (
-            <h1 className="text-3xl my-3 font-bold">Settings</h1>
+            <>
+              <h1 className="text-3xl my-3 font-bold">Settings</h1>
+              <div className="overflow-y-auto">
+                <pre>
+                  <code>{hledgerVersion}</code>
+                </pre>
+              </div>
+            </>
           )}
         </div>
       </div>
