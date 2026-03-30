@@ -7,6 +7,6 @@
   ],
   "permissions": [
     "os:allow-os-type",
-    "window:allow-start-dragging"
+    "core:window:allow-start-dragging"
   ]
 }

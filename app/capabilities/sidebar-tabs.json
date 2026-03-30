@@ -6,6 +6,6 @@
     "main"
   ],
   "permissions": [
-    "window:allow-set-title"
+    "core:window:allow-set-title"
   ]
 }
