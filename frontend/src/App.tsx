@@ -1,4 +1,4 @@
-import { getCurrent } from "@tauri-apps/api/window";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import { Button } from "./components/ui/button";
 import { useEffect, useState } from "react";
 import type { Event } from "@tauri-apps/api/event";
@@ -17,7 +17,7 @@ const useWindowFocused = () => {
       setFocused(focused.payload);
     };
 
-    const unlisten = getCurrent().onFocusChanged(onFocusChanged);
+    const unlisten = getCurrentWindow().onFocusChanged(onFocusChanged);
 
     return () => {
       unlisten.then((result) => {

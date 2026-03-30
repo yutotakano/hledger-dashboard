@@ -1,6 +1,6 @@
 import type React from "react";
-import { useCallback, useState, useEffect } from "react";
-import { type } from "@tauri-apps/plugin-os";
+import { useCallback } from "react";
+import { type as osType } from "@tauri-apps/plugin-os";
 
 interface SidebarData {
   [key: string]: {
@@ -16,16 +16,6 @@ interface SidebarProps {
   children?: React.ReactNode;
 }
 
-const useOSType = () => {
-  const [currentOSType, setCurrentOSType] = useState("");
-  useEffect(() => {
-    type().then((platform) => {
-      setCurrentOSType(platform);
-    });
-  }, []);
-  return currentOSType;
-};
-
 const Sidebar: React.FC<SidebarProps> = ({ active, setActive, data }) => {
   const setActiveTab = useCallback(
     (tab: keyof SidebarData & string) => {
@@ -35,7 +25,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActive, data }) => {
   );
 
   // On macOS, shift the sidebar down to make room for the overlaid title bar
-  const os_type = useOSType();
+  const os_type = osType();
   const sidebar_margin = os_type === "macos" ? "mt-6" : "";
 
   return (
