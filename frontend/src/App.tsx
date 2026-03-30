@@ -5,14 +5,16 @@ import type { Event } from "@tauri-apps/api/event";
 import { invoke } from "@tauri-apps/api/core";
 import Sidebar from "./components/ui/Sidebar";
 
-const useOnFocusChanged = (callback: (focused: boolean) => void) => {
+const useWindowFocused = () => {
+  const [focused, setFocused] = useState(false);
+
   // Use a listener for appWindow.onFocusChanged, and clean it up
   // when the component unmounts. The Tauri IPC is only available to listen on
   // after the window object is available, which we ensure by using useEffect,
   // which only runs after renders (+ when variables are changed).
   useEffect(() => {
     const onFocusChanged = (focused: Event<boolean>) => {
-      callback(focused.payload);
+      setFocused(focused.payload);
     };
 
     const unlisten = getCurrent().onFocusChanged(onFocusChanged);
@@ -24,13 +26,14 @@ const useOnFocusChanged = (callback: (focused: boolean) => void) => {
         }
       });
     };
-  }, [callback]);
+  }, []);
+  return focused;
 };
 
-function App() {
-  const [focused, setFocused] = useState(false);
-  useOnFocusChanged(setFocused);
 
+function App() {
+  // Use a lower opacity for the main background when the window is not focused
+  const focused = useWindowFocused();
   const main_card_bg = focused ? "bg-opacity" : "bg-opacity-90";
 
   const [active, setActive] = useState("overview");
@@ -68,7 +71,7 @@ function App() {
           <Sidebar active={active} setActive={setActive} data={data} />
         </div>
         <div
-          className={`flex overflow-hidden flex-col h-full max-h-full rounded-md p-4 shadow-md transition-colors bg-white border border-gray-200 ${main_card_bg}`}
+          className={`flex overflow-hidden flex-col h-full max-h-full rounded-md p-4 shadow-md transition-colors bg-white ${main_card_bg}`}
         >
           {active === "overview" && (
             <>

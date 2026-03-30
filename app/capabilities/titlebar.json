@@ -1,0 +1,12 @@
+{
+  "identifier": "titlebar",
+  "description": "permissions to shift macos title bar down",
+  "local": true,
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "os:allow-os-type",
+    "window:allow-start-dragging"
+  ]
+}

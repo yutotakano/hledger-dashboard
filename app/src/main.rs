@@ -11,15 +11,21 @@ use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
 
 fn main() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_os::init())
         .setup(|app| {
             let window = app.get_webview_window("main").unwrap();
             #[cfg(target_os = "macos")]
-            apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, None)
+            apply_vibrancy(&window, NSVisualEffectMaterial::Sidebar, None, Some(0.5))
                 .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
+
+            // On macOS, hide window title
+            #[cfg(target_os = "macos")]
+            window.set_title("").expect("Failed to set window title");
 
             #[cfg(target_os = "windows")]
             apply_mica(&window, Some(false))
                 .expect("Unsupported platform! 'apply_mica' is only supported on Windows");
+
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![

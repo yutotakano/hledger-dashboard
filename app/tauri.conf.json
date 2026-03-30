@@ -51,7 +51,8 @@
         "resizable": true,
         "title": "vite-project",
         "width": 800,
-        "transparent": true
+        "transparent": true,
+        "titleBarStyle": "Overlay"
       }
     ],
     "macOSPrivateApi": true,
